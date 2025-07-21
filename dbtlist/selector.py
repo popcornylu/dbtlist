@@ -61,6 +61,14 @@ class DbtSelector:
                     filtered_nodes.add(node_name)
             selected_nodes = filtered_nodes
 
+        # Always exclude test nodes by default
+        final_nodes = set()
+        for node_name in selected_nodes:
+            node = self.manifest.nodes.get(node_name)
+            if node and node.resource_type != "test":
+                final_nodes.add(node_name)
+        selected_nodes = final_nodes
+
         return selected_nodes
 
     def _apply_selector(self, selector: str) -> Set[str]:
