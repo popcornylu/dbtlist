@@ -3,7 +3,6 @@ CLI interface for dbtlist tool
 """
 
 import click
-from pathlib import Path
 from typing import Optional
 
 from .manifest import ManifestReader, ManifestComparator
@@ -57,7 +56,8 @@ def main(
         for node_unique_id in sorted(selected_nodes):
             # Convert unique_id to dbt list format
             # e.g., "model.jaffle_shop.customers" -> "jaffle_shop.customers"
-            # e.g., "test.jaffle_shop.unique_customers_customer_id.c5af1ff4b1" -> "jaffle_shop.unique_customers_customer_id"
+            # e.g., "test.jaffle_shop.unique_customers_customer_id.c5af1ff4b1"
+            # -> "jaffle_shop.unique_customers_customer_id"
 
             node = new_reader.manifest.nodes.get(node_unique_id)
             if node:

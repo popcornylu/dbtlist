@@ -2,7 +2,6 @@
 Integration tests using real manifest files
 """
 
-import os
 from pathlib import Path
 
 from dbtlist.manifest import ManifestReader, ManifestComparator
@@ -61,38 +60,6 @@ def test_real_manifest_integration():
 def test_cli_functionality():
     """Test CLI functionality without complex manifest creation"""
     from dbtlist.cli import main
-    import tempfile
-    import json
-
-    # Create minimal valid manifest structures
-    minimal_old = {
-        "metadata": {
-            "dbt_schema_version": "https://schemas.getdbt.com/dbt/manifest/v12.json",
-            "dbt_version": "1.5.0",
-            "generated_at": "2023-01-01T00:00:00Z",
-            "invocation_id": "11111111-1111-1111-1111-111111111111",
-            "env": {},
-            "project_name": "test_project",
-            "project_id": "11111111-1111-1111-1111-111111111111",
-            "user_id": None,
-            "send_anonymous_usage_stats": False,
-            "adapter_type": "postgres",
-        },
-        "nodes": {},
-        "sources": {},
-        "macros": {},
-        "docs": {},
-        "exposures": {},
-        "metrics": {},
-        "groups": {},
-        "selectors": {},
-        "disabled": {},
-        "parent_map": {},
-        "child_map": {},
-        "saved_queries": {},
-        "semantic_models": {},
-        "unit_tests": {},
-    }
 
     # Test basic CLI import - if this works, the structure is sound
     assert main is not None
