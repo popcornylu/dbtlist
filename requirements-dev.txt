@@ -1,0 +1,8 @@
+# Development dependencies
+pytest>=7.0
+black>=22.0
+flake8>=6.0
+mypy>=1.0
+
+# Main dependencies (for reference)
+-e .
