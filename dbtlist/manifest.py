@@ -29,11 +29,11 @@ class ManifestReader:
         """Get loaded manifest"""
         if self._manifest is None:
             self.load()
-        return self._manifest
+        return self._manifest  # type: ignore
 
     def get_nodes(self) -> Dict[str, Any]:
         """Get all nodes from manifest"""
-        return self.manifest.nodes
+        return dict(self.manifest.nodes)  # type: ignore
 
     def get_node_names(self) -> Set[str]:
         """Get set of all node names"""

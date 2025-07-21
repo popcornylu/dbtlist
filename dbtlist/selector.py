@@ -11,7 +11,9 @@ from .manifest import ManifestComparator
 class DbtSelector:
     """Use dbt-core's built-in selector functionality"""
 
-    def __init__(self, manifest: Manifest, comparator: ManifestComparator = None):
+    def __init__(
+        self, manifest: Manifest, comparator: Optional[ManifestComparator] = None
+    ):
         self.manifest = manifest
         self.comparator = comparator
 

@@ -23,7 +23,7 @@ def main(
     packages: Optional[str],
     old_manifest: str,
     new_manifest: str,
-):
+) -> None:
     """
     dbtlist - Compare two dbt manifest files and list selected nodes
 
