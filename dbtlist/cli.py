@@ -52,45 +52,9 @@ def main(
             select=select, exclude=exclude, packages=package_list
         )
 
-        # Output results in dbt list format
+        # Output results as unique IDs
         for node_unique_id in sorted(selected_nodes):
-            # Convert unique_id to dbt list format
-            # e.g., "model.jaffle_shop.customers" -> "jaffle_shop.customers"
-            # e.g., "test.jaffle_shop.unique_customers_customer_id.c5af1ff4b1"
-            # -> "jaffle_shop.unique_customers_customer_id"
-
-            node = new_reader.manifest.nodes.get(node_unique_id)
-            if node:
-                # Build the output name following dbt list format
-                parts = [node.package_name]
-
-                # Handle schema based on dbt conventions
-                if hasattr(node, "schema") and node.schema:
-                    schema = node.schema
-                    # Only add schema if it's not the default package schema
-                    # For staging models, use 'staging' instead of full schema
-                    if "staging" in schema.lower() or "stg" in node.name:
-                        parts.append("staging")
-                    elif (
-                        schema != node.package_name
-                        and "dev" not in schema
-                        and "test" not in schema
-                    ):
-                        parts.append(schema)
-
-                # Add the node name
-                parts.append(node.name)
-
-                output_name = ".".join(parts)
-            else:
-                # Fallback: extract from unique_id
-                parts = node_unique_id.split(".")
-                if len(parts) >= 3:
-                    output_name = ".".join(parts[1:])  # Skip resource_type prefix
-                else:
-                    output_name = node_unique_id
-
-            click.echo(output_name)
+            click.echo(node_unique_id)
 
     except Exception as e:
         click.echo(f"Error: {e}", err=True)
